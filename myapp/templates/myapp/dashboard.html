@@ -1,0 +1,23 @@
+<!-- myapp/templates/dashboard.html -->
+{% extends 'myapp/base.html' %}
+{% block content %}
+<body>
+<div class="logged-in-box auth0-box logged-in">
+    <h2>Welcome {{ request.user.username }}</h2>
+    <pre>{{ userdata }}</pre>
+    {% if request.user.is_authenticated == True %}
+      <p> logged in </p>
+      <p> Please enter your product's unique ID </p>
+      <form action="/dashboard/" method="post">
+        {% csrf_token %}
+        {{ UID }}
+        <input type="submit" value="Submit">
+      </form>
+    {% endif %}
+    
+<!-- for logging out -->
+    <a class="btn btn-primary btn-lg btn-logout" href="/logout">Logout</a>
+</div>
+
+</body>
+{% endblock %}
